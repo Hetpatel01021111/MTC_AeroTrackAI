@@ -1,0 +1,10 @@
+node_modules
+.next/
+.env
+.env.*
+credentials/
+*.log
+.DS_Store
+.vercel/
+.cache/
+dist/
