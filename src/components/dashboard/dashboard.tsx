@@ -11,6 +11,9 @@ export function Dashboard() {
   const [totalFlights, setTotalFlights] = useState(0);
   const [maintenanceCompleted, setMaintenanceCompleted] = useState(0);
   const [maintenanceDue, setMaintenanceDue] = useState(0);
+  
+  // Hide internal test cards by default; can be enabled via env flag
+  const showTestTabs = process.env.NEXT_PUBLIC_SHOW_TEST_TABS === 'true';
 
   // Calculate real statistics from maintenance entries
   const completedEntries = maintenanceEntries.filter(entry => entry.status === 'Completed').length;
@@ -84,11 +87,13 @@ export function Dashboard() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Firebase Test Component */}
-      <FirebaseTest />
-      
-      {/* Rules Test Component */}
-      <RulesTest />
+      {/* Internal Test Components (hidden by default) */}
+      {showTestTabs && (
+        <>
+          <FirebaseTest />
+          <RulesTest />
+        </>
+      )}
       
       {/* Key Metrics Cards */}
       <div className="px-6 py-6">
