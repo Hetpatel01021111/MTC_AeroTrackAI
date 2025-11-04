@@ -421,178 +421,55 @@ graph TB
 
 ### ✅ **Complete Feature Set**
 
-#### 🔍 **Advanced Search & Filtering**
-- **Global Search**: Search across flight numbers, aircraft types, users, and descriptions
-- **Multi-Filter System**: Filter by status, maintenance type, date ranges
-- **Real-time Results**: Instant filtering with live result counts
-- **Smart Suggestions**: Auto-complete and search history
-
-#### ☑️ **Multi-Select Operations**
-- **Bulk Actions**: Select multiple entries for batch operations
-- **Visual Feedback**: Clear selection indicators and counters
-- **Persistent Selections**: Maintain selections across filter changes
-- **Smart Controls**: Select all/none with header checkbox
-
-#### 🗑️ **Data Management**
-- **CRUD Operations**: Complete Create, Read, Update, Delete functionality
-- **Confirmation Dialogs**: Prevent accidental data loss
-- **Real-time Sync**: Immediate Firebase synchronization
-- **Audit Trail**: Track all changes with user attribution
-
-#### 🤖 **AI-Powered Chat Assistant**
-- **Dialogflow CX Integration**: Advanced conversational AI
-- **Gemma 3 4B Model**: Sophisticated natural language processing
-- **Context Awareness**: Maintains conversation history and context
-- **Multi-modal Support**: Text and voice interactions
-
-#### 🔐 **Authentication & Security**
-- **Firebase Authentication**: Secure user management
-- **Google OAuth**: One-click social login
-- **Security Rules**: Granular Firestore access control
-- **Session Management**: Secure token handling
-
-#### 📊 **Analytics & Monitoring**
-- **Real-time Dashboard**: Live metrics and KPIs
-- **Performance Tracking**: System health monitoring
-- **User Analytics**: Usage patterns and insights
-- **Maintenance Statistics**: Predictive analytics
+- **🔍 Advanced Search & Filtering** - Global search, multi-filters, real-time results
+- **☑️ Multi-Select Operations** - Bulk actions, visual feedback, persistent selections  
+- **🗑️ Data Management** - Full CRUD operations, real-time sync, audit trails
+- **🤖 AI-Powered Chat** - Dialogflow CX + Gemma 3 4B, context-aware conversations
+- **🔐 Authentication & Security** - Firebase Auth, Google OAuth, granular access control
+- **📊 Analytics & Monitoring** - Real-time dashboards, performance tracking, predictive analytics
 
 ## 🛠️ Technology Stack
 
-### **Frontend**
-- **Next.js 15.5.6**: React framework with App Router
-- **React 19.1.0**: Latest React with concurrent features
-- **TypeScript 5.0**: Type-safe development
-- **Tailwind CSS 4.0**: Utility-first styling
-- **Framer Motion**: Smooth animations and transitions
-- **Lucide React**: Modern icon library
-
-### **Backend & Database**
-- **Firebase 12.5.0**: Backend-as-a-Service platform
-- **Cloud Firestore**: NoSQL real-time database
-- **Firebase Authentication**: User management
-- **BigQuery**: Data warehouse and analytics
-- **Google Cloud Functions**: Serverless computing
-
-### **AI & Machine Learning**
-- **Dialogflow CX**: Conversational AI platform
-- **Google Vertex AI**: ML model management
-- **Gemma 3 4B**: Large language model
-- **BigQuery ML**: In-database machine learning
-
-### **Infrastructure & Deployment**
-- **Vercel**: Edge deployment platform
-- **Google Cloud Platform**: Cloud infrastructure
-- **Fivetran**: Data pipeline orchestration
-- **OpenSky Network**: Real-time flight data
+- **Frontend**: Next.js 15, React 19, TypeScript 5, Tailwind CSS 4, Framer Motion
+- **Backend**: Firebase 12.5, Cloud Firestore, BigQuery, Google Cloud Functions
+- **AI/ML**: Dialogflow CX, Vertex AI, Gemma 3 4B, BigQuery ML, n8n Automation
+- **Infrastructure**: Vercel, Google Cloud Platform, Fivetran, OpenSky Network
 
 ## 📁 Project Structure
 
 ```
 flighttrackerAi/
-├── 📁 src/
-│   ├── 📁 app/                    # Next.js App Router
-│   │   ├── 📁 api/               # API routes
-│   │   │   ├── chat/             # Dialogflow integration
-│   │   │   ├── maintenance/      # CRUD operations
-│   │   │   └── flights/          # Flight data endpoints
-│   │   ├── 📁 chat/              # Chat interface pages
-│   │   ├── 📁 maintenance/       # Maintenance management
-│   │   ├── 📁 flights/           # Flight tracking
-│   │   └── layout.tsx            # Root layout
-│   ├── 📁 components/            # React components
-│   │   ├── 📁 auth/              # Authentication components
-│   │   ├── 📁 chat/              # Chat interface
-│   │   ├── 📁 dashboard/         # Dashboard widgets
-│   │   ├── 📁 maintenance/       # Maintenance forms
-│   │   └── 📁 layout/            # Layout components
-│   ├── 📁 contexts/              # React contexts
-│   │   ├── AuthContext.tsx       # Authentication state
-│   │   ├── chat-context.tsx      # Chat state management
-│   │   └── maintenance-context.tsx # Maintenance data
-│   ├── 📁 lib/                   # Utility libraries
-│   │   ├── firebase.ts           # Firebase configuration
-│   │   ├── dialogflow.ts         # AI integration
-│   │   └── utils.ts              # Helper functions
-│   └── 📁 hooks/                 # Custom React hooks
-├── 📁 credentials/               # Service account keys
-├── 📁 public/                    # Static assets
-├── 📁 scripts/                   # Build and deployment scripts
-├── 📄 package.json               # Dependencies and scripts
-├── 📄 next.config.ts             # Next.js configuration
-├── 📄 tailwind.config.js         # Tailwind CSS configuration
-├── 📄 tsconfig.json              # TypeScript configuration
-└── 📄 .env.local                 # Environment variables
+├── src/app/          # Next.js App Router (API routes, pages, layout)
+├── src/components/   # React components (auth, chat, dashboard, maintenance)
+├── src/contexts/     # React contexts (auth, chat, maintenance state)
+├── src/lib/          # Utilities (firebase, dialogflow, helpers)
+├── credentials/      # Service account keys
+├── public/           # Static assets
+└── config files      # package.json, next.config.ts, tailwind.config.js
 ```
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **Node.js 18+** and **npm 8+**
-- **Google Cloud Project** with enabled APIs
-- **Firebase Project** with Firestore and Authentication
+**Prerequisites**: Node.js 18+, Google Cloud Project, Firebase Project
 
-### 1. Clone Repository
 ```bash
+# 1. Clone & Install
 git clone https://github.com/VIDITJAIN7/AeroTrackAI.git
 cd AeroTrackAI/flighttrackerAi
-```
-
-### 2. Install Dependencies
-```bash
 npm install
-```
 
-### 3. Environment Setup
-```bash
+# 2. Environment Setup
 cp env.template .env.local
-```
+# Configure Firebase, Dialogflow CX, and Google Cloud credentials
 
-Configure your `.env.local`:
-```env
-# Firebase Configuration
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-
-# Dialogflow CX Configuration
-GOOGLE_APPLICATION_CREDENTIALS=./credentials/service-account.json
-DIALOGFLOW_CX_PROJECT_ID=your_project_id
-DIALOGFLOW_CX_LOCATION=global
-DIALOGFLOW_CX_AGENT_ID=your_agent_id
-DIALOGFLOW_LANGUAGE_CODE=en-US
-
-# Application Configuration
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NODE_ENV=development
-```
-
-### 4. Firebase Setup
-1. **Create Firebase Project**: [Firebase Console](https://console.firebase.google.com/)
-2. **Enable Authentication**: Email/Password + Google OAuth
-3. **Create Firestore Database**: Start in test mode
-4. **Configure Security Rules**: See [Firestore Rules](#firestore-security-rules)
-
-### 5. Google Cloud Setup
-1. **Enable APIs**:
-   - Dialogflow API
-   - Cloud Firestore API
-   - Firebase Authentication API
-2. **Create Service Account**: Download JSON credentials
-3. **Place credentials**: `./credentials/service-account.json`
-
-### 6. Dialogflow CX Setup
-1. **Create Agent**: [Dialogflow CX Console](https://dialogflow.cloud.google.com/cx/)
-2. **Configure Intents**: Welcome, Flight Status, Maintenance, Help
-3. **Deploy Agent**: Ensure agent is active and published
-
-### 7. Run Development Server
-```bash
+# 3. Run Development Server
 npm run dev
 ```
+
+**Setup Requirements**:
+- Firebase: Authentication + Firestore + Security Rules
+- Google Cloud: Enable Dialogflow API + Service Account
+- Dialogflow CX: Create Agent + Configure Intents
 
 Visit [http://localhost:3000](http://localhost:3000)
 
@@ -601,300 +478,105 @@ Visit [http://localhost:3000](http://localhost:3000)
 ### Firestore Security Rules
 ```javascript
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Users can read and write their own user document
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
-    
-    // Maintenance entries - users can only access their own entries
     match /maintenance/{maintenanceId} {
       allow read, write: if request.auth != null && 
-        (resource == null || resource.data.userId == request.auth.uid) &&
-        (request.resource == null || request.resource.data.userId == request.auth.uid);
+        (resource == null || resource.data.userId == request.auth.uid);
     }
   }
 }
 ```
 
 ### Dialogflow CX Intents
-
-#### Welcome Intent
-- **Training Phrases**: "Hello", "Hi", "Good morning", "Help me"
-- **Response**: "Hello! I'm your flight management assistant. How can I help you today?"
-
-#### Flight Status Intent
-- **Training Phrases**: 
-  - "What's the status of flight [flight_number]?"
-  - "Is flight [flight_number] on time?"
-- **Response**: "I can help you check the status of flight [flight_number]. Let me look that up for you."
-
-#### Maintenance Schedule Intent
-- **Training Phrases**:
-  - "When is the next maintenance scheduled?"
-  - "Show me maintenance schedule"
-- **Response**: "I can show you the maintenance schedule. Let me pull that information for you."
+- **Welcome**: "Hello", "Hi" → "Hello! I'm your flight management assistant."
+- **Flight Status**: "Status of flight [number]?" → "Let me check that flight for you."
+- **Maintenance**: "Show maintenance schedule" → "I'll pull the maintenance information."
 
 ## 🚀 Deployment
 
 ### Vercel Deployment
+1. **Connect**: Import GitHub repo to [Vercel Dashboard](https://vercel.com/dashboard)
+2. **Environment Variables**: Add all `.env.local` variables to Vercel settings
+3. **Build Settings**: Framework: Next.js, Build: `npm run build`, Output: `.next`
+4. **Deploy**: Push to GitHub → Auto-deployment
 
-#### 1. Connect Repository
-- Go to [Vercel Dashboard](https://vercel.com/dashboard)
-- Import your GitHub repository
-- Select `flighttrackerAi` as root directory
-
-#### 2. Environment Variables
-Add all environment variables from `.env.local` to Vercel:
-
-```env
-GOOGLE_APPLICATION_CREDENTIALS_JSON={"type":"service_account",...}
-DIALOGFLOW_CX_PROJECT_ID=your_project_id
-DIALOGFLOW_CX_LOCATION=global
-DIALOGFLOW_CX_AGENT_ID=your_agent_id
-DIALOGFLOW_LANGUAGE_CODE=en-US
-NEXT_PUBLIC_APP_URL=https://your-app.vercel.app
-NODE_ENV=production
-```
-
-#### 3. Build Configuration
-- **Framework**: Next.js
-- **Build Command**: `npm run build`
-- **Output Directory**: `.next`
-- **Install Command**: `npm install`
-
-#### 4. Deploy
 ```bash
-npm run build  # Test build locally
-# Push to GitHub - Vercel auto-deploys
-```
-
-### Manual Deployment
-```bash
-# Build for production
-npm run build
-
-# Start production server
-npm start
+# Test locally before deployment
+npm run build && npm start
 ```
 
 ## 🧪 Testing
 
-### Unit Tests
 ```bash
+# Unit Tests
 npm run test
-```
 
-### API Testing
-```bash
-# Test Dialogflow integration
-curl -X POST http://localhost:3000/api/chat \
-  -H "Content-Type: application/json" \
+# API Testing
+curl -X POST http://localhost:3000/api/chat -H "Content-Type: application/json" \
   -d '{"message": "Hello, can you help me with flight information?"}'
 
-# Test maintenance API
-curl -X POST http://localhost:3000/api/maintenance \
-  -H "Content-Type: application/json" \
-  -d '{"flightNumber": "FL123", "aircraftType": "Boeing 737"}'
-```
-
-### Firebase Testing
-```bash
-# Test Firebase connection
+# Firebase Testing  
 curl http://localhost:3000/api/test-firebase
-
-# Test Firestore operations
-curl -X POST http://localhost:3000/api/test-maintenance \
-  -H "Content-Type: application/json" \
-  -d '{"userId": "test-user-id"}'
 ```
 
 ## 🔍 Troubleshooting
 
-### Common Issues
+**Common Issues & Solutions**:
+- **Authentication Errors**: Check service account JSON file location
+- **Firestore Permission Denied**: Update Firestore security rules  
+- **Dialogflow Agent Not Found**: Create and configure Dialogflow CX agent
+- **Build Failures**: Run `npm run type-check` and `npm run lint:fix`
+- **Environment Variables**: Verify `.env.local` exists and restart server
 
-#### 1. Authentication Errors
-- **Issue**: "Authentication failed"
-- **Solution**: Check service account JSON file location and permissions
-- **Verify**: `GOOGLE_APPLICATION_CREDENTIALS` path is correct
-
-#### 2. Firestore Permission Denied
-- **Issue**: "Missing or insufficient permissions"
-- **Solution**: Update Firestore security rules
-- **Check**: User authentication status and rule configuration
-
-#### 3. Dialogflow Agent Not Found
-- **Issue**: "No DesignTimeAgent found"
-- **Solution**: Create and configure Dialogflow CX agent
-- **Verify**: Agent ID and project ID match configuration
-
-#### 4. Build Failures
-- **Issue**: TypeScript or build errors
-- **Solution**: 
-  ```bash
-  npm run type-check  # Check TypeScript errors
-  npm run lint        # Check linting issues
-  npm run lint:fix    # Auto-fix linting issues
-  ```
-
-#### 5. Environment Variables
-- **Issue**: Configuration not loading
-- **Solution**: Verify `.env.local` file exists and variables are correctly named
-- **Check**: Restart development server after changes
-
-### Debug Commands
 ```bash
-# Check Node.js version
-node --version  # Should be 18+
-
-# Verify dependencies
-npm list
-
-# Check build output
-npm run build
-
-# Validate environment
-npm run type-check
+# Debug Commands
+node --version        # Check Node.js 18+
+npm run type-check   # Validate TypeScript
+npm run build        # Test build
 ```
 
 ## 📊 Performance Optimization
 
-### Frontend Optimization
-- **Next.js Image Optimization**: Automatic image optimization
-- **Code Splitting**: Automatic route-based code splitting
-- **Static Generation**: Pre-rendered pages for better performance
-- **Edge Functions**: Vercel Edge Runtime for faster responses
-
-### Database Optimization
-- **Firestore Indexes**: Optimized queries with proper indexing
-- **Client-side Sorting**: Reduced server load with local sorting
-- **Pagination**: Efficient data loading with pagination
-- **Caching**: Strategic caching for frequently accessed data
-
-### AI Integration Optimization
-- **Response Caching**: Cache common AI responses
-- **Batch Processing**: Group multiple requests when possible
-- **Fallback Responses**: Graceful degradation for AI failures
-- **Context Management**: Efficient conversation context handling
+- **Frontend**: Next.js image optimization, code splitting, static generation, edge functions
+- **Database**: Firestore indexes, client-side sorting, pagination, strategic caching
+- **AI Integration**: Response caching, batch processing, fallback responses, context management
 
 ## 🔐 Security
 
-### Authentication Security
-- **Firebase Authentication**: Industry-standard security
-- **JWT Tokens**: Secure token-based authentication
-- **OAuth Integration**: Secure Google OAuth implementation
-- **Session Management**: Automatic token refresh and validation
-
-### Data Security
-- **Firestore Rules**: Granular access control
-- **User Isolation**: Users can only access their own data
-- **Input Validation**: Server-side validation for all inputs
-- **XSS Protection**: Built-in Next.js security features
-
-### API Security
-- **Rate Limiting**: Prevent API abuse
-- **CORS Configuration**: Proper cross-origin resource sharing
-- **Environment Variables**: Secure credential management
-- **HTTPS Enforcement**: SSL/TLS encryption for all communications
+- **Authentication**: Firebase Auth, JWT tokens, Google OAuth, session management
+- **Data Security**: Firestore rules, user isolation, input validation, XSS protection
+- **API Security**: Rate limiting, CORS configuration, secure credentials, HTTPS enforcement
 
 ## 📈 Monitoring & Analytics
 
-### Application Monitoring
-- **Vercel Analytics**: Built-in performance monitoring
-- **Error Tracking**: Comprehensive error logging
-- **Performance Metrics**: Core Web Vitals tracking
-- **User Analytics**: Usage patterns and insights
-
-### Database Monitoring
-- **Firestore Metrics**: Read/write operations tracking
-- **Query Performance**: Slow query identification
-- **Storage Usage**: Database size and growth monitoring
-- **Security Events**: Access pattern analysis
-
-### AI Performance
-- **Response Times**: Dialogflow response latency
-- **Success Rates**: AI query success/failure rates
-- **User Satisfaction**: Conversation quality metrics
-- **Usage Patterns**: Popular queries and intents
+- **Application**: Vercel Analytics, error tracking, performance metrics, user insights
+- **Database**: Firestore metrics, query performance, storage monitoring, security events  
+- **AI Performance**: Response times, success rates, conversation quality, usage patterns
 
 ## 🤝 Contributing
 
-### Development Workflow
-1. **Fork Repository**: Create your own fork
-2. **Create Branch**: `git checkout -b feature/amazing-feature`
-3. **Make Changes**: Implement your feature
-4. **Test Changes**: Run tests and verify functionality
-5. **Commit Changes**: `git commit -m 'Add amazing feature'`
-6. **Push Branch**: `git push origin feature/amazing-feature`
-7. **Create PR**: Submit pull request for review
+1. Fork → Create branch → Make changes → Test → Commit → Push → Create PR
+2. **Standards**: TypeScript, ESLint, Prettier, Conventional Commits
+3. **Testing**: Unit, Integration, E2E, Performance tests required
 
-### Code Standards
-- **TypeScript**: Strict type checking enabled
-- **ESLint**: Code linting and formatting
-- **Prettier**: Consistent code formatting
-- **Conventional Commits**: Standardized commit messages
+## 📚 Resources
 
-### Testing Requirements
-- **Unit Tests**: Test individual components
-- **Integration Tests**: Test API endpoints
-- **E2E Tests**: Test complete user workflows
-- **Performance Tests**: Ensure optimal performance
-
-## 📚 Documentation
-
-### API Documentation
-- **REST Endpoints**: Complete API reference
-- **WebSocket Events**: Real-time communication
-- **Authentication**: Security implementation details
-- **Error Codes**: Comprehensive error handling guide
-
-### Component Documentation
-- **React Components**: Props and usage examples
-- **Context Providers**: State management patterns
-- **Custom Hooks**: Reusable logic documentation
-- **Utility Functions**: Helper function reference
-
-### Deployment Guides
-- **Vercel Deployment**: Step-by-step deployment guide
-- **Environment Setup**: Configuration instructions
-- **Domain Configuration**: Custom domain setup
-- **SSL Certificate**: HTTPS configuration
-
-## 🆘 Support
-
-### Getting Help
-- **GitHub Issues**: Report bugs and request features
-- **Discussions**: Community support and questions
-- **Documentation**: Comprehensive guides and tutorials
-- **Examples**: Sample implementations and use cases
-
-### Resources
-- **Next.js Documentation**: [nextjs.org/docs](https://nextjs.org/docs)
-- **Firebase Documentation**: [firebase.google.com/docs](https://firebase.google.com/docs)
-- **Dialogflow CX**: [cloud.google.com/dialogflow](https://cloud.google.com/dialogflow)
-- **Vercel Documentation**: [vercel.com/docs](https://vercel.com/docs)
+- [Next.js Docs](https://nextjs.org/docs) • [Firebase Docs](https://firebase.google.com/docs) • [Dialogflow CX](https://cloud.google.com/dialogflow) • [Vercel Docs](https://vercel.com/docs)
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **OpenSky Network**: Real-time flight data API
-- **Google Cloud Platform**: AI and infrastructure services
-- **Vercel**: Deployment and hosting platform
-- **Firebase**: Backend-as-a-Service platform
-- **Next.js Team**: React framework development
-- **Tailwind CSS**: Utility-first CSS framework
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
 
-**Built with ❤️ by the AeroTrack AI Team**
+**🛩️ Built with ❤️ for Aviation Excellence**
 
-[🌐 Live Demo](https://aerotrack-ai.vercel.app) • [📖 Documentation](https://docs.aerotrack-ai.com) • [🐛 Report Bug](https://github.com/VIDITJAIN7/AeroTrackAI/issues) • [✨ Request Feature](https://github.com/VIDITJAIN7/AeroTrackAI/issues)
+[🌐 Live Demo](https://aerotrack-ai.vercel.app) • [🐛 Issues](https://github.com/Hetpatel01021111/MTC_AeroTrackAI/issues) • [✨ Features](https://github.com/Hetpatel01021111/MTC_AeroTrackAI/issues)
 
 </div>
