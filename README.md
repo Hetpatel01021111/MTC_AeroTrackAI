@@ -37,7 +37,6 @@ AeroTrack AI is a comprehensive flight management platform with integrated machi
 graph TB
     %% ===== DATA SOURCES =====
     API["🛰️ OpenSky Network API<br/>📡 Real-time Flight Data<br/>🔄 Live Telemetry Stream"]
-    WEATHER["🌤️ Weather APIs<br/>🌍 Environmental Data<br/>📊 Meteorological Info"]
     MANUAL["👨‍✈️ Manual Input<br/>📝 Maintenance Reports<br/>🔧 Field Data Entry"]
     
     %% ===== ETL & PROCESSING =====
@@ -80,7 +79,6 @@ graph TB
     
     %% ===== DATA FLOW CONNECTIONS =====
     API --> FVT
-    WEATHER --> FVT
     MANUAL --> FVT
     FVT --> TRANSFORM
     TRANSFORM --> N8N
@@ -135,7 +133,7 @@ graph TB
     classDef user fill:#FFEBEE,stroke:#D32F2F,stroke-width:3px,color:#B71C1C,font-weight:bold
     
     %% Apply Styles to Components
-    class API,WEATHER,MANUAL dataSource
+    class API,MANUAL dataSource
     class FVT,TRANSFORM etl
     class N8N automation
     class BQ_RAW,BQ_TRAIN,BQ_PRED,BQ_FINAL warehouse
@@ -171,7 +169,7 @@ graph LR
     MANUAL_TRIGGER["👆 Manual Trigger<br/>🚀 On-Demand Execution<br/>🚨 Emergency Workflows"]
     
     %% n8n Processing Nodes
-    FETCH_DATA["🌐 Fetch Flight Data<br/>🛰️ OpenSky API Call<br/>🌤️ Weather Data Retrieval"]
+    FETCH_DATA["🌐 Fetch Flight Data<br/>🛰️ OpenSky API Call<br/>📊 Data Processing"]
     BUILD_REPORT["📊 Build HTML Report<br/>📋 Maintenance Summary<br/>📈 Flight Statistics"]
     CONDITION["❓ Condition Check<br/>⚠️ Risk Assessment<br/>🎯 Threshold Validation"]
     
@@ -249,19 +247,17 @@ graph LR
 graph TB
     subgraph "Data Sources"
         API["🛰️ OpenSky Network API<br/>📡 Real-time Flight Data<br/>🔄 Live ADS-B Telemetry"]
-        WEATHER["🌤️ Weather APIs<br/>🌍 Environmental Data<br/>📊 Meteorological Info"]
         MANUAL["👨‍✈️ Manual Input<br/>📝 Maintenance Reports<br/>🔧 Field Data Entry"]
     end
     
     API --> |"Flight Positions<br/>Aircraft Status<br/>Route Information"| OUTPUT1["📊 Flight Data Stream"]
-    WEATHER --> |"Weather Conditions<br/>Temperature<br/>Wind Speed"| OUTPUT2["🌡️ Environmental Data"]
-    MANUAL --> |"Maintenance Logs<br/>Inspection Reports<br/>Issue Tracking"| OUTPUT3["📋 Manual Records"]
+    MANUAL --> |"Maintenance Logs<br/>Inspection Reports<br/>Issue Tracking"| OUTPUT2["📋 Manual Records"]
     
     classDef dataSource fill:#E3F2FD,stroke:#1976D2,stroke-width:3px,color:#0D47A1,font-weight:bold
     classDef output fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px,color:#4A148C,font-weight:bold
     
-    class API,WEATHER,MANUAL dataSource
-    class OUTPUT1,OUTPUT2,OUTPUT3 output
+    class API,MANUAL dataSource
+    class OUTPUT1,OUTPUT2 output
 ```
 
 ### ⚙️ **2. ETL & Processing Layer**
