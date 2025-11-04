@@ -14,93 +14,143 @@ AeroTrack AI is a comprehensive flight management platform that combines real-ti
 
 ## 🏗️ System Architecture
 
+### 📋 **Architecture Overview**
+AeroTrack AI follows a modern, microservices-based architecture with clear separation of concerns across six distinct layers: **Data Sources**, **ETL/Processing**, **Data Warehouse**, **Machine Learning**, **Application Layer**, and **User Interface**.
+
 ```mermaid
 %% ===============================================
 %% AeroTrack AI - Complete System Architecture
+%% Perfectly Aligned with Stage Separation
 %% ===============================================
-graph TD
-    %% ===== DATA SOURCES =====
-    API["🛰️ OpenSky Network API<br/>Real-time Flight Data"]
-    WEATHER["🌤️ Weather APIs<br/>Environmental Data"]
-    MANUAL["👨‍✈️ Manual Input<br/>Maintenance Reports"]
+graph TB
+    %% ===== STAGE 1: DATA SOURCES =====
+    subgraph DS ["🌐 STAGE 1: DATA SOURCES"]
+        direction TB
+        API["🛰️ OpenSky Network API<br/>📡 Real-time Flight Data<br/>🔄 Live Telemetry Stream"]
+        WEATHER["🌤️ Weather APIs<br/>🌍 Environmental Data<br/>📊 Meteorological Info"]
+        MANUAL["👨‍✈️ Manual Input<br/>📝 Maintenance Reports<br/>🔧 Field Data Entry"]
+    end
     
-    %% ===== ETL & INGESTION =====
-    FVT["⚙️ Fivetran Connector<br/>fivetran_connector/connector.py<br/>Data Pipeline Orchestration"]
-    TRANSFORM["🔄 Data Transformation<br/>SQL Processing Layer<br/>Feature Engineering"]
+    %% ===== STAGE 2: ETL & PROCESSING =====
+    subgraph ETL ["⚙️ STAGE 2: ETL & DATA PROCESSING"]
+        direction TB
+        FVT["🔄 Fivetran Connector<br/>📂 fivetran_connector/connector.py<br/>🚀 Data Pipeline Orchestration"]
+        TRANSFORM["🔍 Data Transformation<br/>📊 SQL Processing Layer<br/>🧮 Feature Engineering"]
+        N8N["🤖 n8n Workflow Automation<br/>⏰ Scheduled Tasks & Reminders<br/>📧 Email Notifications<br/>🔔 Alert Management"]
+    end
     
-    %% ===== DATA WAREHOUSE =====
-    BQ_RAW["🗄️ BigQuery: live_flights<br/>Raw Telemetry Storage<br/>Real-time Ingestion"]
-    BQ_TRAIN["📊 BigQuery: daily_flight_hours<br/>Training Dataset<br/>ML Feature Store"]
-    BQ_PRED["🧮 BigQuery: predictions_%<br/>ML Predictions<br/>Partitioned by Date"]
-    BQ_FINAL["📅 BigQuery: maintenance_schedules<br/>Final Schedules<br/>Production Data"]
+    %% ===== STAGE 3: DATA WAREHOUSE =====
+    subgraph DW ["🗄️ STAGE 3: DATA WAREHOUSE & ANALYTICS"]
+        direction TB
+        BQ_RAW["📥 BigQuery: live_flights<br/>🗃️ Raw Telemetry Storage<br/>⚡ Real-time Ingestion"]
+        BQ_TRAIN["📊 BigQuery: daily_flight_hours<br/>🎯 Training Dataset<br/>🏪 ML Feature Store"]
+        BQ_PRED["🧮 BigQuery: predictions_%<br/>🔮 ML Predictions<br/>📅 Partitioned by Date"]
+        BQ_FINAL["📋 BigQuery: maintenance_schedules<br/>✅ Final Schedules<br/>🚀 Production Data"]
+    end
     
-    %% ===== MACHINE LEARNING =====
-    ML_TRAIN["🤖 ML Model Training<br/>Predictive Algorithms<br/>Maintenance Forecasting"]
-    ML_PRED["📈 ML Batch Prediction<br/>Automated Scoring<br/>Risk Assessment"]
-    VERTEX["🧠 Google Vertex AI<br/>Model Management<br/>MLOps Pipeline"]
+    %% ===== STAGE 4: MACHINE LEARNING =====
+    subgraph ML ["🤖 STAGE 4: MACHINE LEARNING & AI"]
+        direction TB
+        ML_TRAIN["🎓 ML Model Training<br/>🧠 Predictive Algorithms<br/>🔧 Maintenance Forecasting"]
+        VERTEX["🌟 Google Vertex AI<br/>🏭 Model Management<br/>🔄 MLOps Pipeline"]
+        ML_PRED["📈 ML Batch Prediction<br/>🎯 Automated Scoring<br/>⚠️ Risk Assessment"]
+        GEMMA["🤖 Gemma 3 4B Model<br/>💬 Advanced AI Responses<br/>🧠 Context-Aware Chat"]
+    end
     
-    %% ===== BACKEND SERVICES =====
-    FIREBASE_AUTH["🔐 Firebase Authentication<br/>User Management<br/>Google OAuth Integration"]
-    FIRESTORE["🔥 Cloud Firestore<br/>Real-time Database<br/>User Data & Maintenance Records"]
-    FIREBASE_RULES["🛡️ Security Rules<br/>Data Access Control<br/>User Permissions"]
+    %% ===== STAGE 5: BACKEND SERVICES =====
+    subgraph BE ["🔧 STAGE 5: BACKEND SERVICES & APIS"]
+        direction TB
+        FIREBASE_AUTH["🔐 Firebase Authentication<br/>👤 User Management<br/>🔑 Google OAuth Integration"]
+        FIRESTORE["🔥 Cloud Firestore<br/>💾 Real-time Database<br/>📊 User Data & Records"]
+        FIREBASE_RULES["🛡️ Security Rules<br/>🔒 Data Access Control<br/>👥 User Permissions"]
+        DIALOGFLOW["🗣️ Dialogflow CX Agent<br/>💭 Conversational AI<br/>🔤 Natural Language Processing"]
+        API_ROUTES["🔌 API Routes Layer<br/>📡 /api/chat<br/>🔧 /api/maintenance<br/>✈️ /api/flights"]
+    end
     
-    %% ===== AI & CONVERSATIONAL =====
-    DIALOGFLOW["🗣️ Dialogflow CX Agent<br/>Conversational AI<br/>Natural Language Processing"]
-    GEMMA["🤖 Gemma 3 4B Model<br/>Advanced AI Responses<br/>Context-Aware Chat"]
+    %% ===== STAGE 6: FRONTEND & USER INTERFACE =====
+    subgraph FE ["💻 STAGE 6: FRONTEND & USER INTERFACE"]
+        direction TB
+        NEXTJS["⚛️ Next.js 15 Frontend<br/>🔥 React 19 Components<br/>📘 TypeScript & Tailwind CSS"]
+        
+        subgraph UI ["🎨 User Interface Components"]
+            DASHBOARD["📊 Analytics Dashboard<br/>📈 Real-time KPIs<br/>📋 System Metrics"]
+            MAINTENANCE["🔧 Maintenance Scheduler<br/>✏️ CRUD Operations<br/>📊 Status Management"]
+            CHAT["💬 AI Chat Interface<br/>🗨️ Conversational Queries<br/>🎤 Voice & Text Support"]
+            FLIGHTS["✈️ Flight Tracker<br/>📡 Real-time Status<br/>🗺️ Route Monitoring"]
+        end
+    end
     
-    %% ===== FRONTEND APPLICATION =====
-    NEXTJS["💻 Next.js 15 Frontend<br/>React 19 Components<br/>TypeScript & Tailwind CSS"]
+    %% ===== STAGE 7: DEPLOYMENT & USERS =====
+    subgraph DEPLOY ["🚀 STAGE 7: DEPLOYMENT & USERS"]
+        direction TB
+        VERCEL["🌐 Vercel Deployment<br/>⚡ Edge Network<br/>📈 Auto Scaling"]
+        GCP["☁️ Google Cloud Platform<br/>🏗️ Infrastructure<br/>🔗 Services Integration"]
+        
+        subgraph USERS ["👥 End Users"]
+            LOGISTICS["👨‍✈️ Logistics Manager<br/>🎯 Primary User<br/>👥 Operations Team"]
+            TECHNICIAN["🔧 Maintenance Technician<br/>🏭 Field Operations<br/>✅ Task Execution"]
+            ADMIN["👑 System Administrator<br/>⚙️ Platform Management<br/>🔧 Configuration"]
+        end
+    end
     
-    %% ===== USER INTERFACES =====
-    DASHBOARD["📊 Dashboard<br/>Analytics & KPIs<br/>Real-time Metrics"]
-    MAINTENANCE["🔧 Maintenance Scheduler<br/>CRUD Operations<br/>Status Management"]
-    CHAT["💬 AI Chat Interface<br/>Conversational Queries<br/>Voice & Text Support"]
-    FLIGHTS["✈️ Flight Tracker<br/>Real-time Status<br/>Route Monitoring"]
-    
-    %% ===== USERS =====
-    LOGISTICS["👨‍✈️ Logistics Manager<br/>Primary User<br/>Operations Team"]
-    TECHNICIAN["🔧 Maintenance Technician<br/>Field Operations<br/>Task Execution"]
-    ADMIN["👑 System Administrator<br/>Platform Management<br/>Configuration"]
-    
-    %% ===== DEPLOYMENT & INFRASTRUCTURE =====
-    VERCEL["🚀 Vercel Deployment<br/>Edge Network<br/>Auto Scaling"]
-    GCP["☁️ Google Cloud Platform<br/>Infrastructure<br/>Services Integration"]
-    
-    %% ===== API LAYER =====
-    API_ROUTES["🔌 API Routes<br/>/api/chat<br/>/api/maintenance<br/>/api/flights"]
-    
-    %% ===== CONNECTIONS =====
-    %% Data Flow
+    %% ===== DATA FLOW CONNECTIONS =====
+    %% Stage 1 to Stage 2
     API --> FVT
     WEATHER --> FVT
     MANUAL --> FVT
+    
+    %% Stage 2 Processing
     FVT --> TRANSFORM
+    TRANSFORM --> N8N
+    
+    %% Stage 2 to Stage 3
     TRANSFORM --> BQ_RAW
+    N8N --> BQ_RAW
+    
+    %% Stage 3 Internal Flow
     BQ_RAW --> BQ_TRAIN
+    BQ_TRAIN --> BQ_PRED
+    BQ_PRED --> BQ_FINAL
+    
+    %% Stage 3 to Stage 4
     BQ_TRAIN --> ML_TRAIN
     ML_TRAIN --> VERTEX
     VERTEX --> ML_PRED
     ML_PRED --> BQ_PRED
-    BQ_PRED --> BQ_FINAL
     
-    %% Backend Integration
+    %% Stage 4 to Stage 5
+    GEMMA --> DIALOGFLOW
     BQ_FINAL --> API_ROUTES
     BQ_RAW --> API_ROUTES
-    FIREBASE_AUTH --> NEXTJS
+    
+    %% Stage 5 Internal
+    FIREBASE_AUTH --> API_ROUTES
     FIRESTORE --> API_ROUTES
     FIREBASE_RULES --> FIRESTORE
-    
-    %% AI Integration
     DIALOGFLOW --> API_ROUTES
-    GEMMA --> DIALOGFLOW
-    API_ROUTES --> CHAT
     
-    %% Frontend Components
+    %% Stage 5 to Stage 6
+    API_ROUTES --> NEXTJS
+    FIREBASE_AUTH --> NEXTJS
+    
+    %% Stage 6 Internal
     NEXTJS --> DASHBOARD
     NEXTJS --> MAINTENANCE
     NEXTJS --> CHAT
     NEXTJS --> FLIGHTS
-    API_ROUTES --> NEXTJS
+    
+    %% Stage 6 to Stage 7
+    NEXTJS --> VERCEL
+    FIREBASE_AUTH --> GCP
+    FIRESTORE --> GCP
+    DIALOGFLOW --> GCP
+    VERTEX --> GCP
+    
+    %% n8n Workflow Connections
+    N8N --> LOGISTICS
+    N8N --> TECHNICIAN
+    N8N --> ADMIN
+    BQ_FINAL --> N8N
     
     %% User Interactions
     DASHBOARD --> LOGISTICS
@@ -108,38 +158,121 @@ graph TD
     MAINTENANCE --> TECHNICIAN
     CHAT --> LOGISTICS
     FLIGHTS --> LOGISTICS
-    NEXTJS --> ADMIN
+    VERCEL --> USERS
     
-    %% Deployment
-    NEXTJS --> VERCEL
-    FIREBASE_AUTH --> GCP
-    FIRESTORE --> GCP
-    DIALOGFLOW --> GCP
-    VERTEX --> GCP
+    %% ===== STYLING WITH PERFECT COLORS =====
+    classDef dataSource fill:#E3F2FD,stroke:#1976D2,stroke-width:3px,color:#0D47A1,font-weight:bold
+    classDef etl fill:#FFF3E0,stroke:#F57C00,stroke-width:3px,color:#E65100,font-weight:bold
+    classDef warehouse fill:#E8F5E8,stroke:#388E3C,stroke-width:3px,color:#1B5E20,font-weight:bold
+    classDef ml fill:#FCE4EC,stroke:#C2185B,stroke-width:3px,color:#880E4F,font-weight:bold
+    classDef backend fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px,color:#4A148C,font-weight:bold
+    classDef frontend fill:#E8F5E8,stroke:#43A047,stroke-width:3px,color:#2E7D32,font-weight:bold
+    classDef deployment fill:#FAFAFA,stroke:#616161,stroke-width:3px,color:#212121,font-weight:bold
+    classDef automation fill:#FFF8E1,stroke:#FF8F00,stroke-width:3px,color:#FF6F00,font-weight:bold
+    classDef user fill:#FFEBEE,stroke:#D32F2F,stroke-width:3px,color:#B71C1C,font-weight:bold
     
-    %% ===== STYLING =====
-    classDef dataSource fill:#e3f2fd,stroke:#1976d2,stroke-width:3px,color:#0d47a1,font-weight:bold
-    classDef etl fill:#fff3e0,stroke:#f57c00,stroke-width:3px,color:#e65100,font-weight:bold
-    classDef warehouse fill:#e8f5e8,stroke:#388e3c,stroke-width:3px,color:#1b5e20,font-weight:bold
-    classDef ml fill:#fce4ec,stroke:#c2185b,stroke-width:3px,color:#880e4f,font-weight:bold
-    classDef backend fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px,color:#4a148c,font-weight:bold
-    classDef ai fill:#e1f5fe,stroke:#0277bd,stroke-width:3px,color:#01579b,font-weight:bold
-    classDef frontend fill:#e8f5e8,stroke:#43a047,stroke-width:3px,color:#2e7d32,font-weight:bold
-    classDef user fill:#fff8e1,stroke:#ffa000,stroke-width:3px,color:#ff6f00,font-weight:bold
-    classDef deployment fill:#fafafa,stroke:#616161,stroke-width:3px,color:#212121,font-weight:bold
-    classDef api fill:#ffebee,stroke:#d32f2f,stroke-width:3px,color:#b71c1c,font-weight:bold
+    %% Apply Styles to Stages
+    class DS dataSource
+    class ETL etl
+    class DW warehouse
+    class ML ml
+    class BE backend
+    class FE frontend
+    class DEPLOY deployment
     
-    %% Apply Styles
+    %% Apply Styles to Individual Components
     class API,WEATHER,MANUAL dataSource
     class FVT,TRANSFORM etl
+    class N8N automation
     class BQ_RAW,BQ_TRAIN,BQ_PRED,BQ_FINAL warehouse
-    class ML_TRAIN,ML_PRED,VERTEX ml
-    class FIREBASE_AUTH,FIRESTORE,FIREBASE_RULES backend
-    class DIALOGFLOW,GEMMA ai
-    class NEXTJS,DASHBOARD,MAINTENANCE,CHAT,FLIGHTS frontend
+    class ML_TRAIN,ML_PRED,VERTEX,GEMMA ml
+    class FIREBASE_AUTH,FIRESTORE,FIREBASE_RULES,DIALOGFLOW,API_ROUTES backend
+    class NEXTJS,DASHBOARD,MAINTENANCE,CHAT,FLIGHTS,UI frontend
+    class VERCEL,GCP,USERS deployment
     class LOGISTICS,TECHNICIAN,ADMIN user
-    class VERCEL,GCP deployment
-    class API_ROUTES api
+```
+
+### 🔄 **n8n Workflow Automation Integration**
+
+AeroTrack AI integrates with **n8n** (pronounced "n-eight-n") for powerful workflow automation, scheduled tasks, and intelligent reminder systems that keep your maintenance operations running smoothly.
+
+```mermaid
+%% ===============================================
+%% n8n Workflow Automation for AeroTrack AI
+%% ===============================================
+graph LR
+    %% n8n Workflow Triggers
+    SCHEDULE["⏰ Schedule Trigger<br/>📅 Daily/Weekly/Monthly<br/>🕐 Cron Jobs & Intervals"]
+    WEBHOOK["🔗 Webhook Trigger<br/>📡 API Events<br/>⚡ Real-time Alerts"]
+    MANUAL_TRIGGER["👆 Manual Trigger<br/>🚀 On-Demand Execution<br/>🚨 Emergency Workflows"]
+    
+    %% n8n Processing Nodes
+    FETCH_DATA["🌐 Fetch Flight Data<br/>🛰️ OpenSky API Call<br/>🌤️ Weather Data Retrieval"]
+    BUILD_REPORT["📊 Build HTML Report<br/>📋 Maintenance Summary<br/>📈 Flight Statistics"]
+    CONDITION["❓ Condition Check<br/>⚠️ Risk Assessment<br/>🎯 Threshold Validation"]
+    
+    %% n8n Output Actions
+    SEND_EMAIL["📧 Send Gmail<br/>🔔 Maintenance Alerts<br/>📊 Status Updates"]
+    SLACK_NOTIFY["💬 Slack Notification<br/>👥 Team Alerts<br/>🚨 Urgent Messages"]
+    UPDATE_DB["💾 Update Database<br/>🔥 Firestore Write<br/>📝 Status Changes"]
+    
+    %% Workflow Connections
+    SCHEDULE --> FETCH_DATA
+    WEBHOOK --> FETCH_DATA
+    MANUAL_TRIGGER --> FETCH_DATA
+    
+    FETCH_DATA --> BUILD_REPORT
+    BUILD_REPORT --> CONDITION
+    
+    CONDITION -->|🔴 High Risk| SEND_EMAIL
+    CONDITION -->|🚨 Critical| SLACK_NOTIFY
+    CONDITION -->|📝 Update Required| UPDATE_DB
+    
+    %% Styling
+    classDef trigger fill:#E1F5FE,stroke:#0277BD,stroke-width:3px,color:#01579B,font-weight:bold
+    classDef process fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px,color:#4A148C,font-weight:bold
+    classDef output fill:#E8F5E8,stroke:#388E3C,stroke-width:3px,color:#1B5E20,font-weight:bold
+    
+    class SCHEDULE,WEBHOOK,MANUAL_TRIGGER trigger
+    class FETCH_DATA,BUILD_REPORT,CONDITION process
+    class SEND_EMAIL,SLACK_NOTIFY,UPDATE_DB output
+```
+
+### 🤖 **Automated Workflow Features**
+
+#### ⏰ **Scheduled Reminders & Tasks**
+- **Daily Maintenance Reports**: Automated generation and distribution of maintenance summaries
+- **Weekly Risk Assessments**: Comprehensive analysis of upcoming maintenance needs
+- **Monthly Performance Reviews**: Statistical reports on maintenance efficiency and aircraft uptime
+- **Custom Interval Alerts**: Configurable reminders for specific maintenance milestones
+
+#### 🔔 **Intelligent Alert System**
+- **Predictive Maintenance Alerts**: Proactive notifications based on ML predictions
+- **Threshold-Based Warnings**: Automated alerts when risk scores exceed defined limits
+- **Multi-Channel Notifications**: Email, Slack, SMS, and in-app notifications
+- **Escalation Workflows**: Automatic escalation to supervisors for critical issues
+
+#### 📊 **Automated Reporting**
+- **HTML Email Reports**: Beautiful, responsive maintenance reports with charts and graphs
+- **Executive Dashboards**: High-level summaries for management stakeholders
+- **Technical Detailed Reports**: Comprehensive data for maintenance technicians
+- **Compliance Documentation**: Automated generation of regulatory compliance reports
+
+#### 🔄 **Workflow Examples**
+
+**1. Daily Maintenance Check Workflow:**
+```
+⏰ 6:00 AM Daily → 🌐 Fetch Latest Flight Data → 📊 Generate Report → 📧 Email to Team
+```
+
+**2. High-Risk Alert Workflow:**
+```
+🔗 Risk Threshold Exceeded → ❓ Validate Conditions → 💬 Slack Alert → 📧 Email Supervisor
+```
+
+**3. Weekly Summary Workflow:**
+```
+⏰ Monday 9:00 AM → 🌐 Collect Week's Data → 📊 Build Summary → 📧 Send to Management
 ```
 
 ## 🚀 Features
